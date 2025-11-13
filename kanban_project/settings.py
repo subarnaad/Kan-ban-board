@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#wbg#c7t&_m3*bwr4a#hi=*jav6(&t#h@n5uw%_bdo4_syv8$m'
+# SECRET_KEY = 'django-insecure-#wbg#c7t&_m3*bwr4a#hi=*jav6(&t#h@n5uw%_bdo4_syv8$m'
+
+SECRET_KEY = config("SECRET_KEY")
+DEBUG = config("DEBUG", default=True, cast=bool)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -59,6 +64,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
+    "https://kanbanfrontend-6p1n.vercel.app",
 ]
 
 
@@ -86,16 +92,29 @@ WSGI_APPLICATION = 'kanban_project.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'USER': 'postgres',
+#         'NAME': 'ecommerce',
+#         'PASSWORD': 'jelsa123',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'USER': 'postgres',
-        'NAME': 'ecommerce',
-        'PASSWORD': 'jelsa123',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.parse(config('DATABASE_URL'), conn_max_age=600)
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'kanbandb_0jyz',
+#         'USER': 'kanbandb_0jyz_user',
+#         'PASSWORD': 'fviBSXZ2ravb9A5MSjD924HFJXuQadNt',
+#         'HOST': 'dpg-d4asnd8dl3ps73bll3i0-a.oregon-postgres.render.com',
+#         'PORT': '5432',
+#     }
+# }
 
 
 # Password validation
