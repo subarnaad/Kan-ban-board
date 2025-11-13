@@ -240,7 +240,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # CORS
 CORS_ALLOWED_ORIGINS = config(
     "CORS_ALLOWED_ORIGINS",
-    default="http://localhost:3000,https://kanbanfrontends.vercel.app"
+    default=""
 ).split(",")
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
