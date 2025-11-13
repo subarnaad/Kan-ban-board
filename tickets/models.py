@@ -1,31 +1,6 @@
 from django.db import models
 
 
-class Ticket(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    column = models.ForeignKey(
-        'Column',
-        on_delete=models.CASCADE,
-        related_name='tickets',
-        null=True,   # <-- allow null for existing tickets
-        blank=True   # <-- optional, allows blank in forms
-    )
-    priority = models.CharField(
-        max_length=10,
-        choices=[
-            ('low', 'Low'),
-            ('medium', 'Medium'),
-            ('high', 'High'),
-        ],
-        default='medium'
-    )
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return self.title
-
 class Board(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
@@ -59,6 +34,17 @@ class Ticket(models.Model):
         ],
         default='medium'
     )
+
+    status = models.CharField(
+        max_length=20,
+        choices=[
+            ('pending', 'Pending'),
+            ('in_progress', 'In Progress'),
+            ('completed', 'Completed'),
+        ],
+        default='pending'
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
