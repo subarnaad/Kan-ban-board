@@ -30,7 +30,7 @@ DEBUG = config("DEBUG", default=True, cast=bool)
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
 
-ALLOWED_HOSTS = ["kan-ban-board-gxma.onrender.com"]
+# ALLOWED_HOSTS = ["kan-ban-board-gxma.onrender.com"]
 
 
 # Application definition
